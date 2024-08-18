@@ -9,7 +9,9 @@ RUN apt-get update && apt-get install -y \
     libxml2-dev \
     unzip \
     wget \
-    && docker-php-ext-install -j$(nproc) mysqli gd xml
+    libicu-dev \
+    && docker-php-ext-configure intl \
+    && docker-php-ext-install -j$(nproc) intl mysqli gd xml
 
 # Télécharger et installer GLPI
 RUN wget https://github.com/glpi-project/glpi/releases/download/10.0.6/glpi-10.0.6.tgz -O /tmp/glpi.tgz && \
